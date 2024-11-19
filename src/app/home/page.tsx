@@ -9,13 +9,39 @@ export default function RegisterOrders() {
   useEffect(() => {
     const timer = setInterval(() => {
       const date = new Date();
-      setCurrentTime(date.toLocaleTimeString());
+      setCurrentTime(date.toISOString());
     }, 1000);
     return () => clearInterval(timer);
   }, []);
 
-  const handleSubmit = () => {
-    alert(`Setor: ${sector} | Horário: ${currentTime}`);
+  const handleSubmit = async () => {
+    if (!sector) {
+      alert("Selecione um setor antes de cadastrar!");
+      return;
+    }
+
+    const orderData = { sector, currentTime };
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(result.message);
+        setSector("");
+      } else {
+        alert(`Erro: ${result.message}`);
+      }
+    } catch (error) {
+      alert(`Erro ao enviar dados: ${error}`);
+    }
   };
 
   return (
