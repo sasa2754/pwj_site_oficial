@@ -41,7 +41,7 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
-                    <div className="font-semibold flex flex-col gap-4 text-center items-center">
+                    <div className="font-semibold flex flex-col gap-5 text-center">
                         <Link className="cursor-pointer hover:text-neutral-600 text-2xl" href={ROUTES.home} onClick={toggleMenu}>{op1}</Link>
                         <Link className="cursor-pointer hover:text-neutral-600 text-2xl" href={ROUTES.viewOrders} onClick={toggleMenu}>{op2}</Link>
                         <Link className="cursor-pointer hover:text-neutral-600 text-2xl" href={ROUTES.webcam} onClick={toggleMenu}>{op3}</Link>
